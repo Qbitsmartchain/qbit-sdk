@@ -1,0 +1,15 @@
+[package]
+name = "qbit-sdk"
+version = "0.1.0"
+edition = "2021"
+description = "Rust SDK for writing smart contracts on the QBit blockchain"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Qbitsmartchain/qbit-sdk"
+readme = "README.md"
+
+[dependencies]
+polkavm-derive = "0.32"
+
+[features]
+default = []
+std = []
