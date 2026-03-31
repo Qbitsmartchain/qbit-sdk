@@ -39,4 +39,5 @@ jobs:
           cargo +nightly check \
             -Z build-std=core,alloc \
             -Z build-std-features=panic_immediate_abort \
+            -Z json-target-spec \
             --target "$TARGET_JSON"
