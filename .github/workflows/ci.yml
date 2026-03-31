@@ -8,12 +8,13 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: -Dwarnings
 
 jobs:
   check:
     name: Check + Clippy + Format
     runs-on: ubuntu-latest
+    env:
+      RUSTFLAGS: -Dwarnings
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -33,6 +34,7 @@ jobs:
           components: rust-src
       - name: Check compilation for RISC-V guest target
         run: |
-          RUSTFLAGS="-Cpanic=immediate-abort" cargo +nightly check \
+          RUSTFLAGS="-Zunstable-options -Cpanic=immediate-abort" \
+          cargo +nightly check \
             -Z build-std=core,alloc \
             --target riscv32em-unknown-none-elf
