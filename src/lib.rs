@@ -52,6 +52,12 @@ pub struct BumpAllocator {
 // SAFETY: The allocator is only used in a single-threaded guest VM environment.
 unsafe impl Sync for BumpAllocator {}
 
+impl Default for BumpAllocator {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BumpAllocator {
     /// Creates a new bump allocator with a zeroed heap.
     pub const fn new() -> Self {

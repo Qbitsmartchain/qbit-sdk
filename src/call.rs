@@ -1,5 +1,10 @@
 //! Cross-contract call wrappers.
 
+// Result<_, ()> is intentional — cross-contract calls have no meaningful error
+// payload beyond success/failure. A custom error type would add complexity
+// with no benefit since the host only returns 0 or 1.
+#![allow(clippy::result_unit_err)]
+
 use crate::host;
 use crate::types::Address;
 use alloc::vec::Vec;

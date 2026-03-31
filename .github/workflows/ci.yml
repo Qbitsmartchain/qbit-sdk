@@ -31,13 +31,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@nightly
         with:
           components: rust-src
-      - name: Install polkatool
-        run: cargo install polkatool --locked
       - name: Check compilation for RISC-V guest target
         run: |
-          TARGET_JSON=$(polkatool get-target-json-path --bitness 32)
           cargo +nightly check \
             -Z build-std=core,alloc \
             -Z build-std-features=panic_immediate_abort \
-            -Z json-target-spec \
-            --target "$TARGET_JSON"
+            --target riscv32em-unknown-none-elf
