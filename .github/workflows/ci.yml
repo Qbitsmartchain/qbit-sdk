@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -Dwarnings
+
+jobs:
+  check:
+    name: Check + Clippy + Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - run: cargo check --all-targets --features std
+      - run: cargo clippy --all-targets --features std -- -D warnings
+      - run: cargo fmt --all -- --check
+
+  check-guest-target:
+    name: Check (RISC-V guest target)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src
+      - name: Install polkatool
+        run: cargo install polkatool --locked
+      - name: Check compilation for RISC-V guest target
+        run: |
+          TARGET_JSON=$(polkatool get-target-json-path --bitness 32)
+          cargo +nightly check \
+            -Z build-std=core,alloc \
+            -Z build-std-features=panic_immediate_abort \
+            --target "$TARGET_JSON"
