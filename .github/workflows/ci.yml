@@ -33,7 +33,6 @@ jobs:
           components: rust-src
       - name: Check compilation for RISC-V guest target
         run: |
-          cargo +nightly check \
+          RUSTFLAGS="-Cpanic=immediate-abort" cargo +nightly check \
             -Z build-std=core,alloc \
-            -Z unstable-options -C panic=immediate-abort \
             --target riscv32em-unknown-none-elf
