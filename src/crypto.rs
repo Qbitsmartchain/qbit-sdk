@@ -7,7 +7,11 @@ use crate::types::{Address, Hash256, U256};
 pub fn sha3(data: &[u8]) -> Hash256 {
     let mut out = [0u8; 32];
     unsafe {
-        host::sha3_256(data.as_ptr() as u32, data.len() as u32, out.as_mut_ptr() as u32);
+        host::sha3_256(
+            data.as_ptr() as u32,
+            data.len() as u32,
+            out.as_mut_ptr() as u32,
+        );
     }
     out
 }

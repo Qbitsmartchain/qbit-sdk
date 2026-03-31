@@ -24,6 +24,7 @@ pub mod types;
 
 /// Prelude — import everything a contract typically needs.
 pub mod prelude {
+    pub use crate::abi::{Decode, Encode};
     pub use crate::block;
     pub use crate::call;
     pub use crate::crypto;
@@ -33,7 +34,6 @@ pub mod prelude {
     pub use crate::msg;
     pub use crate::storage;
     pub use crate::types::{Address, Hash256, U256};
-    pub use crate::abi::{Decode, Encode};
     pub use polkavm_derive::{polkavm_export, polkavm_import};
 }
 

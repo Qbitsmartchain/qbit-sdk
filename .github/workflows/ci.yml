@@ -35,5 +35,5 @@ jobs:
         run: |
           cargo +nightly check \
             -Z build-std=core,alloc \
-            -Z build-std-features=panic_immediate_abort \
+            -Z unstable-options -C panic=immediate-abort \
             --target riscv32em-unknown-none-elf

@@ -112,12 +112,7 @@ extern "C" {
     /// topics_ptr: pointer to contiguous topic data.
     /// data_ptr/data_len: unindexed event data.
     /// Returns 1 on success.
-    pub fn emit_event(
-        topic_count: u32,
-        topics_ptr: u32,
-        data_ptr: u32,
-        data_len: u32,
-    ) -> u32;
+    pub fn emit_event(topic_count: u32, topics_ptr: u32, data_ptr: u32, data_len: u32) -> u32;
 
     // --- Cross-contract calls ---
 
