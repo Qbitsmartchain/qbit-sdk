@@ -44,7 +44,7 @@ cargo +nightly build --release \
     -Z build-std="core,alloc" \
     -Z build-std-features="panic_immediate_abort"
 
-polkatool link target/riscv32emac-unknown-none-polkavm/release/<name> -o <name>.polkavm
+polkatool link target/riscv32emac-unknown-none-polkavm/release/<name> -o <name>.qvm
 ```
 
 ## Documentation
